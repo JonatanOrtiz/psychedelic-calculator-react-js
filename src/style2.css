@@ -1,0 +1,117 @@
+body{
+  font-family: 'Open Sans', sans-serif;
+  background-color: black;
+}
+#container{
+  width: 1000px;
+  height: 550px;
+  margin: 20px auto;
+}
+#calculator{
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  width: 320px;
+  height: 510px;
+  background-color: #8f8f8fc4;
+  margin: 0px auto;
+  top: 20px;
+  position: relative;
+  border-radius: 5px;
+}
+#result{
+  height: 120px;
+}
+#history-value{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#history{
+  text-align: right;
+  height: 20px;
+  margin: 0 20px;
+  padding-top: 30px;
+  font-size: 16px;
+  color: rgb(226, 226, 226);
+}
+#output-value{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#output{
+  color: rgb(226, 226, 226);
+  text-align: right;
+  height: 43px;
+  margin: 10px 20px;
+  font-size: 30px;
+  background-color: rgba(0, 140, 175, 0.384);
+  border-radius: 5px;
+}
+#hidden-output{
+  display: none;
+}
+#keyboard{
+  padding-top: 40px;
+  height: 400px;
+}
+input[type=checkbox]{
+  display: none;
+}
+label {
+  color: rgb(209, 209, 209);
+  padding-right: 6px;
+  margin-top: 15px;
+  margin-left: 7px;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  float: left;
+  border-radius: 50%;
+  border-width: 0;
+  font-size: 18px;
+}
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after {
+  transition: all 750ms;
+  transition-delay: 0;
+}
+.operator, .number, .comma, .sign{
+  color: rgb(209, 209, 209);
+  width: 50px;
+  height: 50px;
+  margin: 7px;
+  float: left;
+  border-radius: 50%;
+  border-width: 0;
+  font-weight: bold;
+  font-size: 16px;
+}
+.operator{
+  font-size: 15;
+}
+.number, .comma{
+  background-color: rgba(255, 255, 255, 0);
+}
+.operator, .sign{
+  background-color: rgb(87, 87, 87);
+}
+.operator:hover, .number:hover, .comma:hover, .sign:hover{
+  color: rgb(0, 150, 150);
+}
+label:active{
+  font-size: 17;
+}
+.number:active, .comma:active{
+  font-size: 14;
+  background-color: black;
+}
+.operator:active, .sign:active{
+  font-size: 17;
+  color: rgb(2, 0, 99);
+  box-shadow: 2px 4px 7px 0px rgb(13, 0, 87), -1px -1px 10px 0px rgb(11, 0, 114);
+}
+.operator:focus, .number:focus, .comma:focus, .sign:focus{
+  outline: 0;
+}
