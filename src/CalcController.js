@@ -88,7 +88,7 @@
 //           history = history + op1 + "(" + screen + ")";
 //           printHistory(history);
 //         }
-//         else {
+//         el se {
 //           if (op2 == "√" || op2 == "R") {
 //             history = history + op1;
 //             printHistory(history);
