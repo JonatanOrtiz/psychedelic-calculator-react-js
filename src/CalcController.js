@@ -1,6 +1,7 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable default-case */
 /* eslint-disable no-loop-func */
+
 // function getHistory() {
 //   return document.getElementById("history-value").innerText;
 // }

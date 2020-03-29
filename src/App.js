@@ -1,278 +1,237 @@
 /* eslint-disable default-case */
-import React, { Component, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import Keyboard from './components/keyboard'
-import Output from './components/output'
-import History from './components/history'
-import HiddenOutput from './components/hiddenOutput'
 import './style.css'
 // import './style2.css'
 
+export default function App() {
+  const [hiddenValue, setHiddenValue] = useState('')
+  const [outputValue, setOutputValue] = useState(0)
+  const [historyValue, setHistoryValue] = useState('')
+  const [clickedNumber, setClickedNumber] = useState(false)
+  const [numberScreen, setNumberScreen] = useState('')
+  const [numberMemory, setNumberMemory] = useState('')
+  const [opScreen, setOpScreen] = useState('')
+  const [opMemory, setOpMemory] = useState('')
 
-
-class App extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      hiddenValue: '',
-      outputValue: 0,
-      history: '',
-      clickedNumber: false,
-      numberScreen: '',
-      numberMemory: '',
-      opScreen: '',
-      opMemory: ''
-    }
+  function printHistory(num) {
+    setHistoryValue(num)
   }
 
-  handleEnter(){
-    alert("Enter key is pressed")
-  }
-
-  
-  
-  printHistory = async (num) => {
-    await this.setState({ history: num })
-  }
-
-  printOutput = async (num) => {
+  function printOutput(num) {
     var n = Number(num)
     var value = n.toLocaleString('en')
     if (num === '0') {
-      await this.setState({ outputValue: 0 })
+      setOutputValue(0)
     }
     else if (num === '') {
-      await this.setState({ outputValue: '' })
+      setOutputValue('')
     }
     else if (num === '.') {
-      await this.setState({ outputValue: value + '.' })
+      setOutputValue(value + '.')
     }
     else {
-    await this.setState({ outputValue: num })
+      setOutputValue(value)
     }
-    await this.setState({ hiddenValue: num })
+    setHiddenValue(num)
   }
 
-  clear = async () => {
-    await this.setState({
-      clickedNumber: false,
-      numberScreen: '',
-      numberMemory: '',
-      opScreen: '',
-      opMemory: ''
-    })
-    await this.printHistory('')
-    await this.printOutput('0')
+  function clear() {
+    setClickedNumber(false)
+    setNumberScreen('')
+    setNumberMemory('')
+    setOpScreen('')
+    setOpMemory('')
+    printHistory('')
+    printOutput('0')
   }
 
-  backspace = async () => {
-    var output = this.state.hiddenValue.toString()
+  function backspace() {
+    var output = hiddenValue.toString()
     if (output !== '0') {
       output = output.substr(0, output.length - 1)
-      await this.printOutput(output)
-      await this.setState({ clickedNumber: true })
+      printOutput(output)
+      setClickedNumber(true)
       if (output === '' || output === '-') {
-        await this.printOutput('0')
-        await this.setState({ clickedNumber: true })
+        printOutput('0')
+        setClickedNumber(true)
       }
     }
   }
 
-  number = async button => {
-    if (this.state.opScreen === '√' || this.state.opScreen === 'R') {
-      this.clear()
+  function number(button) {
+    if (opScreen === '√' || opScreen === 'R') {
+      clear()
     }
-    if (this.state.hiddenValue === '0') {
-      await this.printOutput('')
+    if (hiddenValue === '0') {
+      printOutput('')
     }
-    if (this.state.clickedNumber === false) {
-      await this.printOutput('')
+    if (clickedNumber === false) {
+      printOutput('')
     }
-    await this.setState({ clickedNumber: true })
-    var output = this.state.hiddenValue
+    setClickedNumber(true)
+    var output = hiddenValue
     output = Number(output + button)
     if (output === '') {
-      await this.printOutput('0')
+      printOutput('0')
     }
     else {
-      await this.printOutput(output)
+      printOutput(output)
     }
   }
-
-  signal = async () => {
-    var output = this.state.hiddenValue
+  
+  function signal() {
+    var output = hiddenValue
     if (output === '0' || output === '') { }
     else if (output.toString().startsWith('-')) {
       output = output.toString().substr(1, output.length)
-      await this.printOutput(output)
+      printOutput(output)
     }
     else {
       output = '-' + output
-      await this.printOutput(output)
+      printOutput(output)
     }
-    await this.setState({ clickedNumber: true })
+    setClickedNumber(true)
   }
 
-  dot = async button => {
-    if (this.state.clickedNumber === false) {
-      await this.printOutput('0.')
-      await this.setState({ clickedNumber: true })
+  function dot(button) {
+    if (clickedNumber === false) {
+      printOutput('0.')
+      setClickedNumber(true)
     }
-    if (this.state.hiddenValue === '') {
-      await this.printOutput('0.')
-      await this.setState({ clickedNumber: true })
+    if (hiddenValue === '') {
+      printOutput('0.')
+      setClickedNumber(true)
     }
-    else if (this.state.hiddenValue.toString().includes('.')) { }
+    else if (hiddenValue.toString().includes('.')) { }
     else {
-      var output = this.state.hiddenValue
+      var output = hiddenValue
       output = output + button
-      await this.printOutput(output)
+      printOutput(output)
     }
   }
 
-  operator = async button => {
-    await this.setState({
-      numberMemory: Number(this.state.numberScreen),
-      numberScreen: Number(this.state.hiddenValue),
-      opMemory: this.state.opScreen,
-      opScreen: button
-    })
-    // alert(this.state.numberMemory)
-    var history = this.state.history
-    if (this.state.clickedNumber === false && this.state.opScreen !== '=' && this.state.opScreen !== '±' && this.state.opScreen !== '√' && this.state.opScreen !== 'R'
-      && this.state.history !== '' && this.state.opMemory !== '√' && this.state.opMemory !== 'R') {
+  function operator(button) {
+    setNumberMemory(Number(numberScreen))
+    setNumberScreen(Number(hiddenValue))
+    setOpMemory(opScreen)
+    setOpScreen(button)
+    var history = historyValue
+    if (clickedNumber === false && opScreen !== '=' && opScreen !== '±' && opScreen !== '√' && opScreen !== 'R'
+      && historyValue !== '' && opMemory !== '√' && opMemory !== 'R') {
       history = history.toString().substr(0, history.length - 1)
-      await this.printHistory(history + this.state.opScreen)
+      printHistory(history + opScreen)
     }
     else {
-      if (this.state.opScreen === '√' || this.state.opScreen === 'R') {
-        history = history + this.state.opScreen + '(' + this.state.numberScreen + ')'
-        await this.printHistory(history)
+      if (opScreen === '√' || opScreen === 'R') {
+        history = history + opScreen + '(' + numberScreen + ')'
+        printHistory(history)
       }
       else {
-        if (this.state.opMemory === '√' || this.state.opMemory === 'R') {
-          history = history + this.state.opScreen
-          await this.printHistory(history)
+        if (opMemory === '√' || opMemory === 'R') {
+          history = history + opScreen
+          printHistory(history)
         }
         else {
-          history = history + this.state.numberScreen + this.state.opScreen
-          await this.printHistory(history)
+          history = history + numberScreen + opScreen
+          printHistory(history)
         }
       }
-      switch (this.state.opScreen) {
+      switch (opScreen) {
         case '√':
-          var result = Math.sqrt(this.state.numberScreen)
+          var result = Math.sqrt(numberScreen)
           if (isNaN(result)) {
             alert("Negative numbers can't have square roots!")
-            this.clear()
+            clear()
           }
           else {
-            await this.printOutput(result)
-            await this.setState({ numberScreen: result })
+            printOutput(result)
+            setNumberScreen(result)
           }
           break
         case 'R':
-          result = 1 / this.state.numberScreen
-          await this.printOutput(result)
-          await this.setState({ numberScreen: result })
+          result = 1 / numberScreen
+          printOutput(result)
+          setNumberScreen(result)
           break
       }
-      switch (this.state.opMemory) {
+      switch (opMemory) {
         case '+':
-          await await this.printOutput(this.state.numberMemory + this.state.numberScreen)
+          printOutput(numberMemory + numberScreen)
           break
         case '-':
-          await this.printOutput(this.state.numberMemory - this.state.numberScreen)
+          printOutput(numberMemory - numberScreen)
           break
         case '*':
-          await this.printOutput(this.state.numberMemory * this.state.numberScreen)
+          printOutput(numberMemory * numberScreen)
           break
         case '/':
-          result = this.state.numberMemory / this.state.numberScreen
+          result = numberMemory / numberScreen
           if (isNaN(result) || result === Infinity) {
             alert('The result of a division by zero is undefined!')
-            this.clear()
+            clear()
           }
           else {
-            await this.printOutput(result)
+            printOutput(result)
           }
           break
         case '%':
-          await this.printOutput(this.state.numberMemory / 100 * this.state.numberScreen)
+          printOutput(numberMemory / 100 * numberScreen)
           break
         case '^':
-          await this.printOutput(Math.pow(this.state.numberMemory, this.state.numberScreen))
+          printOutput(Math.pow(numberMemory, numberScreen))
           break
       }
-      if (this.state.opScreen === '=') {
-        await this.printHistory('')
+      if (opScreen === '=') {
+        printHistory('')
       }
     }
-    await this.setState({ clickedNumber: false, numberScreen: Number(this.state.hiddenValue) })
-  }
-
-  Click = async button => {
-    // button.preventDefault()
+    setClickedNumber(false)
+    setNumberScreen(Number(hiddenValue))
+  } 
+  
+  function click(button) {
     if (button === '.') {
-      await this.dot(button)
+      dot(button)
     }
     else if (button === '±') {
-      await this.signal()
+      signal()
     }
     else if (button === 'clear') {
-      await this.clear()
+      clear()
     }
     else if (button === 'backspace') {
-      await this.backspace()
+      backspace()
     }
     else if (button === 'clear-entry') {
-      await this.printOutput('0')
+      printOutput('0')
     }
     else if (isNaN(button)) {
-      await this.operator(button)
+      operator(button)
     }
     else {
-      await this.number(button)
+      number(button)
     }
   }
 
-  
-  // useKey(key, cb){
-  //   // const callbackRef = useRef(cb)
-  
-  //   useEffect(() => {
-  //     // callbackRef.current = cb
-  //   })
-  
-  //   useEffect(() => {
-  //     function handle(event){
-  //       if (event.code === key){
-  //         // callbackRef.current(event)
-  //       }
-  //     }
-  //     document.addEventListener("keypress", handle)
-  //     return () => document.removeEventListener("keypress", handle)
-  //   },[key])
-  // }
-
-  render() {
-    
-    // this.useKey("Enter", this.handleEnter)
-    return (
-      <div className='App' >
-        <div id='container'>
-          <div id='calculator'>
-            <div id='result'>
-              <History historyValue={this.state.history} />
-              <HiddenOutput hiddenOutputValue={this.state.hiddenValue} />
-              <Output outputValue={this.state.outputValue} />
+  return (
+    <div className='App' >
+      <div id='container'>
+        <div id='calculator'>
+          <div id='result'>
+            <div id="history">
+              <p id="history-value">{historyValue}</p>
             </div>
-            <Keyboard onClick={this.Click} />
+            <div id="hidden-output">
+              <p id="hidden-output-value">{hiddenValue}</p>
+            </div>
+            <div id="output">
+              <p id="output-value">{outputValue}</p>
+            </div>
           </div>
+          <Keyboard onClick={click} />
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-export default App
