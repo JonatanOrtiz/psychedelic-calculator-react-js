@@ -1,10 +1,11 @@
 /* eslint-disable default-case */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Keyboard from './components/keyboard'
 import './style.css'
 // import './style2.css'
 
 export default function App() {
+  const [control, setControl] = useState('')
   const [hiddenValue, setHiddenValue] = useState('')
   const [outputValue, setOutputValue] = useState(0)
   const [historyValue, setHistoryValue] = useState('')
@@ -14,13 +15,9 @@ export default function App() {
   const [opScreen, setOpScreen] = useState('')
   const [opMemory, setOpMemory] = useState('')
 
-  function printHistory(num) {
-    setHistoryValue(num)
-  }
-
-  function printOutput(num) {
-    var n = Number(num)
-    var value = n.toLocaleString('en')
+  async function printOutput(num) {
+    var n = await Number(num)
+    var value = await n.toLocaleString('en')
     if (num === '0') {
       setOutputValue(0)
     }
@@ -36,161 +33,162 @@ export default function App() {
     setHiddenValue(num)
   }
 
-  function clear() {
+  async function clear() {
     setClickedNumber(false)
     setNumberScreen('')
     setNumberMemory('')
     setOpScreen('')
     setOpMemory('')
-    printHistory('')
-    printOutput('0')
+    setHistoryValue('')
+    await printOutput('0')
   }
 
-  function backspace() {
-    var output = hiddenValue.toString()
+  async function backspace() {
+    var output = await hiddenValue.toString()
     if (output !== '0') {
-      output = output.substr(0, output.length - 1)
-      printOutput(output)
+      output = await output.substr(0, output.length - 1)
+      await printOutput(output)
       setClickedNumber(true)
       if (output === '' || output === '-') {
-        printOutput('0')
+        await printOutput('0')
         setClickedNumber(true)
       }
     }
   }
 
-  function number(button) {
+  async function number(button) {
     if (opScreen === '√' || opScreen === 'R') {
       clear()
     }
-    if (hiddenValue === '0') {
-      printOutput('')
+    else if (hiddenValue === '0') {
+      await printOutput('')
     }
-    if (clickedNumber === false) {
-      printOutput('')
+    else if (clickedNumber === false) {
+      await printOutput('')
     }
     setClickedNumber(true)
-    var output = hiddenValue
-    output = Number(output + button)
+    // var output = await hiddenValue
+    var output = await Number(hiddenValue + button)
     if (output === '') {
-      printOutput('0')
+      await printOutput('0')
     }
     else {
-      printOutput(output)
+      await printOutput(hiddenValue + button)
     }
   }
   
-  function signal() {
-    var output = hiddenValue
+  async function signal() {
+    var output = await hiddenValue
     if (output === '0' || output === '') { }
     else if (output.toString().startsWith('-')) {
-      output = output.toString().substr(1, output.length)
-      printOutput(output)
+      output = await output.toString().substr(1, output.length)
+      await printOutput(output)
     }
     else {
-      output = '-' + output
-      printOutput(output)
+      output = await '-' + output
+      await printOutput(output)
     }
     setClickedNumber(true)
   }
 
-  function dot(button) {
+  async function dot(button) {
     if (clickedNumber === false) {
-      printOutput('0.')
+      await printOutput('0.')
       setClickedNumber(true)
     }
     if (hiddenValue === '') {
-      printOutput('0.')
+      await printOutput('0.')
       setClickedNumber(true)
     }
     else if (hiddenValue.toString().includes('.')) { }
     else {
-      var output = hiddenValue
-      output = output + button
-      printOutput(output)
+      var output = await hiddenValue
+      output = await output + button
+      await printOutput(output)
     }
   }
 
-  function operator(button) {
+  async function operator(button) {
     setNumberMemory(Number(numberScreen))
     setNumberScreen(Number(hiddenValue))
     setOpMemory(opScreen)
     setOpScreen(button)
-    var history = historyValue
-    if (clickedNumber === false && opScreen !== '=' && opScreen !== '±' && opScreen !== '√' && opScreen !== 'R'
-      && historyValue !== '' && opMemory !== '√' && opMemory !== 'R') {
-      history = history.toString().substr(0, history.length - 1)
-      printHistory(history + opScreen)
+    var history = await historyValue
+    if (clickedNumber === false && button !== '=' && button !== '±' && button !== '√' && button !== 'R'
+      && historyValue !== '' && opScreen !== '√' && opScreen !== 'R') {
+      history = await history.toString().substr(0, history.length - 1)
+      setHistoryValue(history + button)
     }
     else {
-      if (opScreen === '√' || opScreen === 'R') {
-        history = history + opScreen + '(' + numberScreen + ')'
-        printHistory(history)
+      if (button === '√' || button === 'R') {
+        history = await history + button + '(' + hiddenValue + ')'
+        setHistoryValue(history)
       }
       else {
-        if (opMemory === '√' || opMemory === 'R') {
-          history = history + opScreen
-          printHistory(history)
+        if (opScreen === '√' || opScreen === 'R') {
+          history = await history + button
+          setHistoryValue(history)
         }
         else {
-          history = history + numberScreen + opScreen
-          printHistory(history)
+          history = await history + hiddenValue + button
+          setHistoryValue(history)
         }
       }
-      switch (opScreen) {
+      switch (button) {
         case '√':
-          var result = Math.sqrt(numberScreen)
+          var result = await Math.sqrt(hiddenValue)
           if (isNaN(result)) {
             alert("Negative numbers can't have square roots!")
             clear()
           }
           else {
-            printOutput(result)
+            await printOutput(result)
             setNumberScreen(result)
           }
           break
         case 'R':
-          result = 1 / numberScreen
-          printOutput(result)
+          result = await 1 / hiddenValue
+          await printOutput(result)
           setNumberScreen(result)
           break
       }
-      switch (opMemory) {
+      switch (opScreen) {
         case '+':
-          printOutput(numberMemory + numberScreen)
+          await printOutput(numberScreen + hiddenValue)
           break
         case '-':
-          printOutput(numberMemory - numberScreen)
+          await printOutput(numberScreen - hiddenValue)
           break
         case '*':
-          printOutput(numberMemory * numberScreen)
+          await printOutput(numberScreen * hiddenValue)
           break
         case '/':
-          result = numberMemory / numberScreen
+          result = await numberScreen / hiddenValue
           if (isNaN(result) || result === Infinity) {
             alert('The result of a division by zero is undefined!')
             clear()
           }
           else {
-            printOutput(result)
+            await printOutput(result)
           }
           break
         case '%':
-          printOutput(numberMemory / 100 * numberScreen)
+          await printOutput(numberScreen / 100 * hiddenValue)
           break
         case '^':
-          printOutput(Math.pow(numberMemory, numberScreen))
+          await printOutput(Math.pow(numberScreen), hiddenValue)
           break
-      }
-      if (opScreen === '=') {
-        printHistory('')
+      } 
+      if (button === '=') {
+        setHistoryValue('')
       }
     }
     setClickedNumber(false)
-    setNumberScreen(Number(hiddenValue))
+    setNumberScreen(hiddenValue)
   } 
   
-  function click(button) {
+  async function click(button) {
+    setControl(button)
     if (button === '.') {
       dot(button)
     }
@@ -204,7 +202,7 @@ export default function App() {
       backspace()
     }
     else if (button === 'clear-entry') {
-      printOutput('0')
+      await printOutput('0')
     }
     else if (isNaN(button)) {
       operator(button)
