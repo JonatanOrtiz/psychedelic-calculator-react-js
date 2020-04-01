@@ -1,7 +1,26 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import '../style.css';
 
 export default function keyboard(props) {
+
+  function themeChange(e) {
+    if (e.target.checked) {
+      trans()
+      document.documentElement.setAttribute('data-theme', 'dark')
+    }
+    else {
+      trans()
+      document.documentElement.removeAttribute('data-theme')
+    }
+  }
+
+  let trans = () => {
+    document.documentElement.classList.add('transition');
+    window.setTimeout(() => {
+        document.documentElement.classList.remove('transition');
+    }, 1000)
+}
 
   return (
     <div id="keyboard">
@@ -25,7 +44,7 @@ export default function keyboard(props) {
       <button className="number" id="3" onClick={e => props.onClick(e.target.id)}>3</button>
       <button className="operator" id="+" onClick={e => props.onClick(e.target.id)}>+</button>
       <button className="operator" id="-" onClick={e => props.onClick(e.target.id)}>-</button>
-      <input type="checkbox" id="skull" name="theme" /><label htmlFor="skull">&#128128;</label>
+      <input type="checkbox" id="skull" name="theme" onChange={themeChange} /><label htmlFor="skull">&#128128;</label>
       <button className="number" id="0" onClick={e => props.onClick(e.target.id)}>0</button>
       <button className="comma" id="." onClick={e => props.onClick(e.target.id)}>.</button>
       <button className="sign" id="±" onClick={e => props.onClick(e.target.id)}>&#177;</button>

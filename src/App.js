@@ -1,8 +1,7 @@
 /* eslint-disable default-case */
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import Keyboard from "./components/keyboard"
 import "./style.css"
-// import './style2.css'
 
 export default function App() {
 	const [hiddenValue, setHiddenValue] = useState("")
