@@ -1,5 +1,5 @@
 /* eslint-disable default-case */
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Keyboard from "./components/keyboard"
 import "./style.css"
 
@@ -10,6 +10,32 @@ export default function App() {
 	const [clickedNumber, setClickedNumber] = useState(false)
 	const [numberScreen, setNumberScreen] = useState("")
 	const [opScreen, setOpScreen] = useState("")
+
+	useEffect(() => {
+		const key = ".+-*/0123456789"
+
+		function handle(event) {
+			if (key.includes(event.key)) {
+				click(event.key)
+			}
+			switch (event.code) {
+				case "NumpadEnter":
+					click("=")
+					break
+				case "Backspace":
+					click("backspace")
+					break
+				case "Delete":
+					click("clear-entry")
+					break
+				case "Escape":
+					click("clear")
+					break
+			}
+		}
+		document.addEventListener("keydown", handle)
+		return () => document.removeEventListener("keydown", handle)
+	})
 
 	function printOutput(num) {
 		var n = Number(num)
