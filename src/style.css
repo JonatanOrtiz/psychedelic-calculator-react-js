@@ -10,7 +10,7 @@ html {
   --b20: #7d93e0;
   --b25: #b1b1b1;
   --b26: #9477af;
-  --bcg-img: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(bgImg.jpg);
+  --bcg-img: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url("../src/assets/bgImg.jpg");
   --bxsh-calc: 3px 3px 8px 0px rgb(251, 255, 6), 0px 6px 20px 0px rgb(3, 0, 0),
   7px 7px 10px 0px rgb(132, 0, 255),-3px -3px 8px 0px rgb(251, 255, 6),
   -5px -5px 10px 0px rgb(204, 0, 255);
