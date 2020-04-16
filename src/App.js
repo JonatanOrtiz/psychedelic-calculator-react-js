@@ -1,5 +1,3 @@
-/* eslint-disable default-case */
-import React, { useState, useRef, useEffect } from "react"
 import React, { useState, useEffect } from "react"
 import Keyboard from "./components/keyboard"
 import "./style.css"
@@ -11,52 +9,6 @@ export default function App() {
 	const [clickedNumber, setClickedNumber] = useState(false)
 	const [numberScreen, setNumberScreen] = useState("")
 	const [opScreen, setOpScreen] = useState("")
-	// const [control, setControl] = useState("")
-	
-	// function useKey(key, cb){
-		// const callbackRef = useRef(cb)
-
-		// useEffect(() => {
-		// 	callbackRef.current = cb
-		// })
-	
-		useEffect(() => {
-			const operators = '/*-+.0123456789'
-			function handle(event) {
-				if (operators.includes(event.key)){
-					click(event.key)
-				}
-			}
-			document.addEventListener("keypress", handle)
-			return () => document.removeEventListener("keypress", handle)
-		})
-	// }
-
-	// function handleEnter(){
-		// click('=')
-		// alert("NumpadEnter")
-	// }
-
-	// useKey("1", click)
-
-	// function handle(event) {
-	// 	if (event.code === key) {
-	// 		callbackRef.current(event)
-
-	// 	}
-	// }
-	// document.addEventListener("keypress", handle)
-
-	
-	// function handle(event) {
-	// 	if (event.code === "Enter") {
-	// 		operator('=')
-	// 		document.removeEventListener("keypress", handle)
-	// 	}
-	// }
-	// return () => document.removeEventListener("keypress", handle)
-// }, [key])
-	// }
 
 	useEffect(() => {
 		const key = ".+-*/0123456789"
@@ -121,7 +73,6 @@ export default function App() {
 	}
 
 	function number(button) {
-		// alert('number')
 		if (opScreen === "√" || opScreen === "R") {
 			clear()
 		}
@@ -170,7 +121,6 @@ export default function App() {
 	}
 
 	function operator(button) {
-		// alert('operator')
 		setNumberScreen(Number(hiddenValue))
 		setOpScreen(button)
 		var nMemory = Number(numberScreen)
@@ -254,7 +204,6 @@ export default function App() {
 					break
 			}
 			if (button === "=") {
-				// alert('Entrou no igual')
 				setHistoryValue("")
 			}
 			setClickedNumber(false)
@@ -267,7 +216,6 @@ export default function App() {
 	}
 
 	function click(button) {
-		// setControl(button)
 		if (button === ".") {
 			dot(button)
 		} else if (button === "±") {
