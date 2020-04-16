@@ -10,7 +10,7 @@ html {
   --b20: #7d93e0;
   --b25: #b1b1b1;
   --b26: #9477af;
-  --bcg-img: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(bgImg.jpg);
+  --bcg-img: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url("../src/assets/bgImg.jpg");
   --bxsh-calc: 3px 3px 8px 0px rgb(251, 255, 6), 0px 6px 20px 0px rgb(3, 0, 0),
   7px 7px 10px 0px rgb(132, 0, 255),-3px -3px 8px 0px rgb(251, 255, 6),
   -5px -5px 10px 0px rgb(204, 0, 255);
@@ -229,45 +229,3 @@ button:nth-child(26){
   font-size: 18;
   background-color: var(--b26);
 }
-/* label:after {
-  content: '';
-  background: #fff;
-  width: 20px;
-  height: 20px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  position: absolute;
-  top: 5px;
-  left: 4px;
-  -webkit-transition: ease-in-out 2000ms;
-  -moz-transition: ease-in-out 2000ms;
-  -ms-transition: ease-in-out 2000ms;
-  -o-transition: ease-in-out 2000ms;
-  transition: ease-in-out 2000ms;
-}
-
-input:checked + label {
-  background: #FFBD07;
-}
-
-input:checked + label:after {
-  left: calc(100% - 5px);
-  -webkit-transform: translateX(-100%);
-  -moz-transform: translateX(-100%);
-  -ms-transform: translateX(-100%);
-  -o-transform: translateX(-100%);
-  transform: translateX(-100%);
-}
-
-html.transition,
-html.transition *,
-html.transition *:before,
-html.transition *:after {
-  -webkit-transition: ease-in-out 2000ms !important;
-  -moz-transition: ease-in-out 2000ms !important;
-  -ms-transition: ease-in-out 2000ms !important;
-  -o-transition: ease-in-out 2000ms !important;
-  transition: ease-in-out 2000ms !important;
-  transition-delay: 0 !important;
-} */
