@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/psychedelic-calculator-react-js/static/css/main.966d66e4.chunk.css",
-    "main.js": "/psychedelic-calculator-react-js/static/js/main.8198b8ca.chunk.js",
-    "main.js.map": "/psychedelic-calculator-react-js/static/js/main.8198b8ca.chunk.js.map",
+    "main.js": "/psychedelic-calculator-react-js/static/js/main.0d7ae419.chunk.js",
+    "main.js.map": "/psychedelic-calculator-react-js/static/js/main.0d7ae419.chunk.js.map",
     "runtime-main.js": "/psychedelic-calculator-react-js/static/js/runtime-main.0043b02b.js",
     "runtime-main.js.map": "/psychedelic-calculator-react-js/static/js/runtime-main.0043b02b.js.map",
     "static/js/2.d7e6f0de.chunk.js": "/psychedelic-calculator-react-js/static/js/2.d7e6f0de.chunk.js",
     "static/js/2.d7e6f0de.chunk.js.map": "/psychedelic-calculator-react-js/static/js/2.d7e6f0de.chunk.js.map",
     "index.html": "/psychedelic-calculator-react-js/index.html",
-    "precache-manifest.3161266e28f1df977d55f670d568e739.js": "/psychedelic-calculator-react-js/precache-manifest.3161266e28f1df977d55f670d568e739.js",
+    "precache-manifest.4b09331a52988cf26808d7675ddebb54.js": "/psychedelic-calculator-react-js/precache-manifest.4b09331a52988cf26808d7675ddebb54.js",
     "service-worker.js": "/psychedelic-calculator-react-js/service-worker.js",
     "static/css/main.966d66e4.chunk.css.map": "/psychedelic-calculator-react-js/static/css/main.966d66e4.chunk.css.map",
     "static/js/2.d7e6f0de.chunk.js.LICENSE.txt": "/psychedelic-calculator-react-js/static/js/2.d7e6f0de.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.0043b02b.js",
     "static/js/2.d7e6f0de.chunk.js",
     "static/css/main.966d66e4.chunk.css",
-    "static/js/main.8198b8ca.chunk.js"
+    "static/js/main.0d7ae419.chunk.js"
   ]
 }

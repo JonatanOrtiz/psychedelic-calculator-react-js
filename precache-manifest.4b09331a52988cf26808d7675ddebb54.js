@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "791eb9ee2cd72782e8d65b638a05cd7b",
+    "revision": "5fdd668af54bdee61b2786a72630f056",
     "url": "/psychedelic-calculator-react-js/index.html"
   },
   {
-    "revision": "9b18387be731fbc73f89",
+    "revision": "18ba327187d25aabbad1",
     "url": "/psychedelic-calculator-react-js/static/css/main.966d66e4.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/psychedelic-calculator-react-js/static/js/2.d7e6f0de.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9b18387be731fbc73f89",
-    "url": "/psychedelic-calculator-react-js/static/js/main.8198b8ca.chunk.js"
+    "revision": "18ba327187d25aabbad1",
+    "url": "/psychedelic-calculator-react-js/static/js/main.0d7ae419.chunk.js"
   },
   {
     "revision": "46068bc70d83bb8b5625",

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/psychedelic-calculator-react-js/precache-manifest.3161266e28f1df977d55f670d568e739.js"
+  "/psychedelic-calculator-react-js/precache-manifest.4b09331a52988cf26808d7675ddebb54.js"
 );
 
 self.addEventListener('message', (event) => {
