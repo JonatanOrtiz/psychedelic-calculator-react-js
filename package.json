@@ -1,5 +1,5 @@
 {
-  "homepage": "https://jonatanortiz.github.io/psychedelic-calculator-react-js/",
+  "homepage": "https://jonatanortiz.github.io/psychedelic-calculator-react-js",
   "name": "psychedelic-calculator-react",
   "version": "0.1.0",
   "private": true,
@@ -12,7 +12,7 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "pre-deploy": "npm run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
